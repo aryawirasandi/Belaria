@@ -20,7 +20,8 @@
         <activity android:name=".Fragment.FragmentNotification" />
         <activity android:name=".Fragment.FragmentProfile" />
         <activity android:name=".Fragment.FragmentWishlist" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
+        <activity android:name=".Splash"></activity>
     </application>
 
 </manifest>

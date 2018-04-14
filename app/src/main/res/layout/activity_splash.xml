@@ -5,6 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primer"
-    tools:context="com.example.aryawirasandi.belaria.Login">
+    tools:context="com.example.aryawirasandi.belaria.Splash">
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:src="@drawable/logobelaria"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="124dp" />
 
 </android.support.constraint.ConstraintLayout>
