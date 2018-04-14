@@ -3,6 +3,8 @@ package com.example.aryawirasandi.belaria.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.aryawirasandi.belaria.R;
+
 public class FragmentWishlist extends AppCompatActivity {
 
     @Override

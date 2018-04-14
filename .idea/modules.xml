@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BELARIA.iml" filepath="$PROJECT_DIR$/BELARIA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Belaria.iml" filepath="$PROJECT_DIR$/Belaria.iml" />
+      <module fileurl="file://F:\Kuliah Semester 6\BELARIA\Belaria.iml" filepath="F:\Kuliah Semester 6\BELARIA\Belaria.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://F:\Kuliah Semester 6\BELARIA\app\app.iml" filepath="F:\Kuliah Semester 6\BELARIA\app\app.iml" />
     </modules>
   </component>
 </project>
