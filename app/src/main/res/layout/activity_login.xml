@@ -6,5 +6,5 @@
     android:layout_height="match_parent"
     android:background="@color/primer"
     tools:context="com.example.aryawirasandi.belaria.Login">
-
+telor
 </android.support.constraint.ConstraintLayout>
