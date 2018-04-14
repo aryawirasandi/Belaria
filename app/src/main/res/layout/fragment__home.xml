@@ -1,0 +1,89 @@
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="178dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/home"/>
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_48"
+            android:layout_marginLeft="@dimen/margin_24"
+            android:layout_marginRight="@dimen/margin_24"
+            android:layout_marginTop="-24dp"
+            android:background="#FFFFFF"
+            android:elevation="@dimen/elevation" >
+        </SearchView>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="88dp"
+                android:layout_marginBottom="@dimen/margin_32"
+                android:layout_marginTop="@dimen/margin_32"
+                android:layout_marginLeft="@dimen/margin_24"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="89dp"
+                    android:layout_height="88dp"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:src="@drawable/sq1" />
+
+                <ImageView
+                    android:layout_width="89dp"
+                    android:layout_height="88dp"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:src="@drawable/sq1" />
+
+                <ImageView
+                    android:layout_width="89dp"
+                    android:layout_height="88dp"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:src="@drawable/sq1" />
+
+                <ImageView
+                    android:layout_width="89dp"
+                    android:layout_height="88dp"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:src="@drawable/sq1" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_24"
+            android:letterSpacing="0.12"
+            android:text="Featured Product"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_marginRight="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_24"
+            android:layout_marginBottom="144dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+</ScrollView>
+
+
