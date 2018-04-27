@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aryawirasandi.belaria">
+    package="com.example.aryawirasandi.belariaapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -16,12 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Fragment.Fragment_Home" />
-        <activity android:name=".Fragment.FragmentNotification" />
-        <activity android:name=".Fragment.FragmentProfile" />
-        <activity android:name=".Fragment.FragmentWishlist" />
-        <activity android:name=".Login" />
-        <activity android:name=".Splash"></activity>
+        <activity android:name=".SignIn" />
+        <activity android:name=".SignUp" />
+        <activity
+            android:name=".Home"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".FoodList" />
+        <activity android:name=".FoodDetail"></activity>
     </application>
 
 </manifest>

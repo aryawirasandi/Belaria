@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "762419197735",
+    "firebase_url": "https://belaria-8afd1.firebaseio.com",
+    "project_id": "belaria-8afd1",
+    "storage_bucket": "belaria-8afd1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762419197735:android:53174f7e7f3cb27e",
+        "android_client_info": {
+          "package_name": "com.example.aryawirasandi.belariaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762419197735-31kut14a2le8lo79tml67peagge8pgp3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aryawirasandi.belariaapp",
+            "certificate_hash": "8955f417bf3d1f3c868634c58b188ede5990ef76"
+          }
+        },
+        {
+          "client_id": "762419197735-fd7vcumj7rsqd816mtrlc29v2cr3glc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARsW8pdhKI0pcaUKYnQjI1s1bKuAxhoYI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762419197735-fd7vcumj7rsqd816mtrlc29v2cr3glc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
