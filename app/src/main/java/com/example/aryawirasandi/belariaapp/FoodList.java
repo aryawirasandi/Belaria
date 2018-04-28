@@ -1,5 +1,6 @@
 package com.example.aryawirasandi.belariaapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -54,7 +55,7 @@ public class FoodList extends AppCompatActivity {
     private void loadLIstFood(String categoryId) {
         adapter = new FirebaseRecyclerAdapter<Food, foodViewHolder>(Food.class, R.layout.food_item, foodViewHolder.class, foodList.orderByChild("MenuId").equalTo(categoryId)) {
             @Override
-            protected void populateViewHolder(foodViewHolder viewHolder, Food model, int position) {
+            protected void populateViewHolder(foodViewHolder viewHolder, Food model, final int position) {
                 viewHolder.food_name.setText(model.getName());
 
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
@@ -64,7 +65,10 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.setItemClickListener(new itemClickListener() {
                     @Override
                     public void onClick(View view, int posititon, boolean isLongClick) {
-                        Toast.makeText(FoodList.this, ""+local.getName(), Toast.LENGTH_SHORT).show();
+                        //Start new Activity
+                        Intent foodDetail = new Intent(FoodList.this, FoodDetail.class);
+                        foodDetail.putExtra("FoodId",adapter.getRef(position).getKey()); //Send food Id to new activity
+                        startActivity(foodDetail);
                     }
                 });
 
