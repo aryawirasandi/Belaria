@@ -24,6 +24,7 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sigin);
+
         edtPhone = findViewById(R.id.edtPhone);
         edtPassword = findViewById(R.id.edtPassword);
 
@@ -48,6 +49,7 @@ public class SignIn extends AppCompatActivity {
                             // Trying getting information from firebase
                             mDialog.dismiss();
                             User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                            user.setPhone(edtPhone.getText().toString()); //set Phone
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
                                 Intent homIntent = new Intent(SignIn.this, Home.class);
                                 Common.currentUser = user;

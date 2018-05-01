@@ -52,17 +52,16 @@
     <Button
         android:id="@+id/btnSignIn"
         android:text="SignIn"
+        android:textColor="@android:color/white"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
         android:layout_alignParentBottom="true"
-        android:textColor="@android:color/white"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:shadowColor="@android:color/black"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@color/btnSignActive"
+        android:shadowColor="@android:color/black"
         app:shadowEnabled="true"
         app:shadowHeight="5dp"
-        app:cornerRadius="4dp"
-        android:layout_height="wrap_content" />
+        app:cornerRadius="4dp" />
 </RelativeLayout>
