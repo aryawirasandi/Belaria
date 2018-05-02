@@ -144,14 +144,14 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_menu) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_cart) {
             Intent cartIntent = new Intent(Home.this,Cart.class);
             startActivity(cartIntent);
 
-        } else if (id == R.id.nav_cart) {
-//            Intent orderIntent = new Intent(Home.this,OrderStatus.class);
-//            startActivity(orderIntent);
+        } else if (id == R.id.nav_order) {
+            Intent orderIntent = new Intent(Home.this,OrderStatus.class);
+            startActivity(orderIntent);
 
         } else if (id == R.id.nav_log_out) {
             //Logout
