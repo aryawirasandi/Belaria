@@ -1,18 +1,18 @@
 package com.example.aryawirasandi.belariaapp.Model;
 
 public class Food {
-    private String Name, Image, Description, Price, Discount, MenuId;
+    private String Name,Image,Description,Price,Discount,MenuId;
 
-    public Food(){
+    public Food() {
     }
 
-    public Food(String name, String image, String description, String price, String discount, String menuId) {
+    public Food(String name, String menuId, String discount, String price, String description, String image) {
         Name = name;
-        Image = image;
-        Description = description;
-        Price = price;
-        Discount = discount;
         MenuId = menuId;
+        Discount = discount;
+        Price = price;
+        Description = description;
+        Image = image;
     }
 
     public String getName() {

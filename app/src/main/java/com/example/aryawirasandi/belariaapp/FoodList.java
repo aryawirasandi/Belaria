@@ -15,7 +15,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-import com.example.aryawirasandi.belariaapp.Interface.itemClickListener;
+import com.example.aryawirasandi.belariaapp.Interface.ItemClickListener;
 
 public class FoodList extends AppCompatActivity {
 
@@ -24,57 +24,71 @@ public class FoodList extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference foodList;
-    String categoryId = "";
 
-    FirebaseRecyclerAdapter<Food, foodViewHolder> adapter;
+    String categoryId= "";
+
+    FirebaseRecyclerAdapter<Food,foodViewHolder> adapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
-//      init firebase
 
+        //Firebase
         database = FirebaseDatabase.getInstance();
         foodList = database.getReference("Foods");
 
-        recyclerView = findViewById(R.id.recycler_food);
+        recyclerView = (RecyclerView)findViewById(R.id.recycler_food);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // get the intent
-
-        if(getIntent() != null){
+        //get intent
+        if(getIntent()!=null)
             categoryId = getIntent().getStringExtra("CategoryId");
-        if(!categoryId.isEmpty() && categoryId != null){
-                loadLIstFood(categoryId);
-            }
+        if (!categoryId.isEmpty() && categoryId != null)
+        {
+            loadListFood(categoryId);
+
         }
+
+
 
     }
 
-    private void loadLIstFood(String categoryId) {
-        adapter = new FirebaseRecyclerAdapter<Food, foodViewHolder>(Food.class, R.layout.food_item, foodViewHolder.class, foodList.orderByChild("MenuId").equalTo(categoryId)) {
+    private void loadListFood(String categoryId) {
+        adapter = new FirebaseRecyclerAdapter<Food, foodViewHolder>(Food.class,
+                R.layout.food_item,
+                foodViewHolder.class,
+                foodList.orderByChild("MenuId").equalTo(categoryId) //like: Select * from Foods where MenuId = '
+        ) {
             @Override
-            protected void populateViewHolder(foodViewHolder viewHolder, Food model, final int position) {
+            protected void populateViewHolder(foodViewHolder viewHolder, Food model, int position) {
                 viewHolder.food_name.setText(model.getName());
-
-                Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
+                Log.d("TAG",model.getName());
+                Picasso.with(getBaseContext()).load(model.getImage())
+                        .into(viewHolder.food_image);
 
                 final Food local = model;
-
-                viewHolder.setItemClickListener(new itemClickListener() {
+                viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
-                    public void onClick(View view, int posititon, boolean isLongClick) {
-                        //Start new Activity
-                        Intent foodDetail = new Intent(FoodList.this, FoodDetail.class);
-                        foodDetail.putExtra("FoodId",adapter.getRef(position).getKey()); //Send food Id to new activity
+                    public void onClick(View view, int position, boolean isLongClick) {
+                        Toast.makeText(FoodList.this, ""+local.getName(), Toast.LENGTH_SHORT).show();
+
+                        // Star new act
+                        Intent foodDetail = new Intent(FoodList.this,FoodDetail.class);
+                        foodDetail.putExtra("FoodId",adapter.getRef(position).getKey());
                         startActivity(foodDetail);
                     }
                 });
 
             }
         };
+
+        //set adapter
         Log.d("TAG",""+adapter.getItemCount());
         recyclerView.setAdapter(adapter);
+
     }
 }

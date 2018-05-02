@@ -3,7 +3,6 @@ package com.example.aryawirasandi.belariaapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aryawirasandi.belariaapp.Common.Common;
-import com.example.aryawirasandi.belariaapp.Interface.itemClickListener;
+import com.example.aryawirasandi.belariaapp.Interface.ItemClickListener;
 import com.example.aryawirasandi.belariaapp.Model.Category;
 import com.example.aryawirasandi.belariaapp.ViewHolder.MenuViewHolder;
 import com.google.firebase.database.DatabaseReference;
@@ -29,27 +28,32 @@ import com.squareup.picasso.Picasso;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    // init firebase
+
     FirebaseDatabase database;
     DatabaseReference category;
     TextView txtFullName;
 
-    RecyclerView recyclerView;
-
+    RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
     FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Menu");
-        setSupportActionBar(toolbar);
+        // setSupportActionBar(toolbar);
 
-        // init firebase
+        // init FB
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
+
+
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -63,48 +67,50 @@ public class Home extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+        drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // set Name for user
-        View headerView = navigationView.getHeaderView(0);
+        View headerView =navigationView.getHeaderView(0);
         txtFullName = (TextView)headerView.findViewById(R.id.txtFullName);
         txtFullName.setText(Common.currentUser.getName());
 
-        // Load Menu
-        recyclerView = findViewById(R.id.recycler_menu);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+        //Load menu
 
-        recyclerView.setLayoutManager(layoutManager);
+        recycler_menu = (RecyclerView)findViewById(R.id.recycler_menu);
+        recycler_menu.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recycler_menu.setLayoutManager(layoutManager);
+
         loadMenu();
 
     }
 
     private void loadMenu() {
-         adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item,MenuViewHolder.class,category) {
+        adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class,R.layout.menu_item,MenuViewHolder.class,category) {
             @Override
-            protected void populateViewHolder(MenuViewHolder viewHolder, Category model, final int position) {
+            protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
                 viewHolder.txtMenuName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage())
-                        .into(viewHolder.imageview);
+                        .into(viewHolder.imageView);
                 final Category clickItem = model;
-                viewHolder.setItemClickListener(new itemClickListener() {
+                viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
-                    public void onClick(View view, int posititon, boolean isLongClick) {
-                        // Get category id and sent to the new activity
-                        Intent foodListIntent = new Intent(Home.this, FoodList.class);
-                        // Getting the id
-                        foodListIntent.putExtra("CategoryId", adapter.getRef(position).getKey());
-                        startActivity(foodListIntent);
+                    public void onClick(View view, int position, boolean isLongClick) {
+                        Toast.makeText(Home.this, ""+clickItem.getName(), Toast.LENGTH_SHORT).show();
+                        //Get CategoryId and send to new Activity
+                        Intent foodList = new Intent(Home.this, FoodList.class);
+                        //Because Category Id is key, so we just get key of this
+                        foodList.putExtra("CategoryId",adapter.getRef(position).getKey());
+                        startActivity(foodList);
                     }
                 });
             }
         };
-        recyclerView.setAdapter(adapter);
+        recycler_menu.setAdapter(adapter);
     }
 
     @Override
@@ -126,15 +132,7 @@ public class Home extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -148,10 +146,18 @@ public class Home extends AppCompatActivity
         if (id == R.id.nav_menu) {
             // Handle the camera action
         } else if (id == R.id.nav_cart) {
+            Intent cartIntent = new Intent(Home.this,Cart.class);
+            startActivity(cartIntent);
 
-        } else if (id == R.id.nav_order) {
+        } else if (id == R.id.nav_cart) {
+//            Intent orderIntent = new Intent(Home.this,OrderStatus.class);
+//            startActivity(orderIntent);
 
         } else if (id == R.id.nav_log_out) {
+            //Logout
+            Intent signIn = new Intent(Home.this,SignIn.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
 
         }
 

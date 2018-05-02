@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.example.aryawirasandi.belariaapp.Interface.itemClickListener;
+import com.example.aryawirasandi.belariaapp.Interface.ItemClickListener;
 import com.example.aryawirasandi.belariaapp.Model.Order;
 import com.example.aryawirasandi.belariaapp.R;
 
@@ -28,9 +28,9 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     public TextView txt_cart_name, txt_price;
     public ImageView img_cart_count;
 
-    private itemClickListener ItemClickListener;
+    private ItemClickListener ItemClickListener;
 
-    public void setTxt_cart_name(TextView txt_cart_name){
+    public void setTxt_cart_name(TextView txt_cart_name) {
         this.txt_cart_name = txt_cart_name;
     }
 
@@ -43,6 +43,7 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
 
     @Override
     public void onClick(View view) {
+
     }
 }
 
@@ -57,29 +58,31 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
     }
 
     @Override
-    public CartViewHolder onCreateViewHolder (ViewGroup parent, int viewType){
+    public CartViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View itemView = inflater.inflate(R.layout.cart_layout,parent,false);
         return new CartViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder (CartViewHolder holder, int position){
+    public void onBindViewHolder(CartViewHolder holder, int position) {
         TextDrawable drawable = TextDrawable.builder()
                 .buildRound(""+listData.get(position).getQuantity(), Color.RED);
         holder.img_cart_count.setImageDrawable(drawable);
 
-        Locale locale = new Locale("en", "US");
+        Locale locale = new Locale("en","US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
-        int price = (Integer.parseInt(listData.get(position).getPrice()))*(Integer.parseInt(listData.get(position).getQuantity()));
+        int price =(Integer.parseInt(listData.get(position).getPrice()))*(Integer.parseInt(listData.get(position).getQuantity()));
         holder.txt_price.setText(fmt.format(price));
 
         holder.txt_cart_name.setText(listData.get(position).getProductName());
+
+
     }
 
     @Override
     public int getItemCount() {
         return listData.size();
     }
-
 }
+

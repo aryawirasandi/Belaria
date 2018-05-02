@@ -6,27 +6,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.aryawirasandi.belariaapp.R;
-import com.example.aryawirasandi.belariaapp.Interface.itemClickListener;
+import com.example.aryawirasandi.belariaapp.Interface.ItemClickListener;
 public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     public TextView txtMenuName;
-    public ImageView imageview;
-    private itemClickListener ItemClickListener;
+    public ImageView imageView;
+
+    private ItemClickListener ItemClickListener;
+
+
     public MenuViewHolder(View itemView) {
         super(itemView);
 
         txtMenuName = (TextView)itemView.findViewById(R.id.menu_name);
-        imageview = (ImageView)itemView.findViewById(R.id.menu_image);
+        imageView = (ImageView)itemView.findViewById(R.id.menu_image);
 
         itemView.setOnClickListener(this);
+
+
     }
 
-    public void setItemClickListener(itemClickListener itemClickListener) {
-        ItemClickListener = itemClickListener;
+    public void setItemClickListener(ItemClickListener ItemClickListener) {
+        this.ItemClickListener = ItemClickListener;
     }
 
     @Override
     public void onClick(View view) {
-        ItemClickListener.onClick(view, getAdapterPosition(), false);
+        ItemClickListener.onClick(view,getAdapterPosition(),false);
+
     }
 }

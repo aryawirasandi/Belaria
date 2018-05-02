@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.aryawirasandi.belariaapp.Common.Common;
 import com.example.aryawirasandi.belariaapp.Database.Database;
@@ -40,6 +41,7 @@ public class Cart extends AppCompatActivity {
     Button btnPlace;
 
     List<Order> cart = new ArrayList<>();
+
     CartAdapter adapter;
 
     @Override
@@ -63,17 +65,20 @@ public class Cart extends AppCompatActivity {
         btnPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 showAlertDialog();
+
             }
         });
-        
+
         loadListFood();
+
     }
 
     private void showAlertDialog() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Cart.this);
-        alertDialog.setTitle("One more step!");
-        alertDialog.setMessage("Enter your address: ");
+        AlertDialog.Builder alerDialog = new AlertDialog.Builder(Cart.this);
+        alerDialog.setTitle("One more step!");
+        alerDialog.setMessage("Enter your address: ");
 
         final EditText edtAddress = new EditText(Cart.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
@@ -81,12 +86,13 @@ public class Cart extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
         edtAddress.setLayoutParams(lp);
-        alertDialog.setView(edtAddress);
-        alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+        alerDialog.setView(edtAddress); // add edit text to alert dialog
+        alerDialog.setIcon(R.drawable.ic_access_time_black_24dp);
 
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alerDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int i) {
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //create new Request
                 Request request = new Request(
                         Common.currentUser.getPhone(),
                         Common.currentUser.getName(),
@@ -94,32 +100,41 @@ public class Cart extends AppCompatActivity {
                         txtTotalPrice.getText().toString(),
                         cart
                 );
+
+                //Submit to Firebase
+                //we will using System.CurrentMilli to key
+                requests.child(String.valueOf(System.currentTimeMillis()))
+                        .setValue(request);
+                //delete cart
+                new Database(getBaseContext()).cleanCart();
+                Toast.makeText(Cart.this, "Thank you, Order Place", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alerDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });
 
-        alertDialog.show();
-
+        alerDialog.show();
     }
 
     private void loadListFood() {
         cart = new Database(this).getCarts();
-        adapter = new CartAdapter(cart, this);
+        adapter = new CartAdapter(cart,this);
         recyclerView.setAdapter(adapter);
 
-        //Calculate total price
+        //calculate total price
         int total = 0;
         for (Order order:cart)
-            total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
-        Locale locale = new Locale("en", "US");
+            total += (Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
+        Locale locale = new Locale("en","US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
         txtTotalPrice.setText(fmt.format(total));
+
     }
 }

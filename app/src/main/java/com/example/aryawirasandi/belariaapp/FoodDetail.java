@@ -22,14 +22,13 @@ import com.squareup.picasso.Picasso;
 
 public class FoodDetail extends AppCompatActivity {
 
-    TextView food_name, food_price, food_description;
+    TextView food_name,food_price,food_description;
     ImageView food_image;
     CollapsingToolbarLayout collapsingToolbarLayout;
     FloatingActionButton btnCart;
     ElegantNumberButton numberButton;
 
     String foodId="";
-
     FirebaseDatabase database;
     DatabaseReference foods;
 
@@ -44,7 +43,7 @@ public class FoodDetail extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         foods = database.getReference("Foods");
 
-        //init view
+        //Init view
         numberButton = (ElegantNumberButton)findViewById(R.id.number_button);
         btnCart = (FloatingActionButton)findViewById(R.id.btnCart);
 
@@ -58,9 +57,10 @@ public class FoodDetail extends AppCompatActivity {
                         currentFood.getPrice(),
                         currentFood.getDiscount()
 
+
                 ));
 
-                Toast.makeText(FoodDetail.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FoodDetail.this, "Add to Cart", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -73,30 +73,34 @@ public class FoodDetail extends AppCompatActivity {
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppbar);
 
-        //get Food Id from Intent
-        if (getIntent() != null)
+        //Get Food Id from Intent
+        if(getIntent()!=null)
             foodId = getIntent().getStringExtra("FoodId");
-        if (!foodId.isEmpty()){
+        if(!foodId.isEmpty())
+        {
             getDetailFood(foodId);
         }
+
     }
 
-    private void getDetailFood(String foodId){
+    private void getDetailFood(String foodId) {
         foods.child(foodId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 currentFood = dataSnapshot.getValue(Food.class);
 
-                //set image
-                Picasso.with(getBaseContext()).load(currentFood.getImage()).into(food_image);
+                //set img
+                Picasso.with(getBaseContext()).load(currentFood.getImage())
+                        .into(food_image);
 
                 collapsingToolbarLayout.setTitle(currentFood.getName());
 
                 food_price.setText(currentFood.getPrice());
-
                 food_name.setText(currentFood.getName());
 
                 food_description.setText(currentFood.getDescription());
+
+
             }
 
             @Override

@@ -16,53 +16,62 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class SignIn extends AppCompatActivity {
-    EditText edtPhone, edtPassword;
-    Button SignIn;
+    EditText edtPhone,edtPassword;
+    Button btnSignIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sigin);
 
-        edtPhone = findViewById(R.id.edtPhone);
-        edtPassword = findViewById(R.id.edtPassword);
+        edtPassword =(MaterialEditText)findViewById(R.id.edtPassword);
+        edtPhone =(MaterialEditText)findViewById(R.id.edtPhone);
+        btnSignIn=(Button)findViewById(R.id.btnSignIn);
 
-        SignIn = findViewById(R.id.btnSignIn);
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference table_user =database.getReference("User");
 
-        // Callback Firebase
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("User");
-
-        SignIn.setOnClickListener(new View.OnClickListener() {
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final ProgressDialog mDialog = new ProgressDialog(com.example.aryawirasandi.belariaapp.SignIn.this);
-                mDialog.setMessage("Please Wait...");
+
+                final ProgressDialog mDialog = new ProgressDialog(SignIn.this);
+                mDialog.setMessage("Please waiting...");
                 mDialog.show();
+
+
                 table_user.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        // If user doesn't exist in firebase
+
+                        //Check if user whether user exist in database
                         if(dataSnapshot.child(edtPhone.getText().toString()).exists()) {
-                            // Trying getting information from firebase
+
+                            //get User inf
                             mDialog.dismiss();
                             User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
-                            user.setPhone(edtPhone.getText().toString()); //set Phone
+                            user.setPhone(edtPhone.getText().toString());//set phone
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
-                                Intent homIntent = new Intent(SignIn.this, Home.class);
+                                Toast.makeText(SignIn.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
+                                Intent homeIntent = new Intent(SignIn.this,Home.class);
                                 Common.currentUser = user;
-                                startActivity(homIntent);
+                                startActivity(homeIntent);
                                 finish();
-                                Toast.makeText(com.example.aryawirasandi.belariaapp.SignIn.this, "SignIN Success", Toast.LENGTH_SHORT).show();
+
                             } else {
-                                Toast.makeText(com.example.aryawirasandi.belariaapp.SignIn.this, "SignIn Failed!!!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignIn.this, "Wrong password!", Toast.LENGTH_SHORT).show();
                             }
-                        }else{
-                            mDialog.dismiss();
-                            Toast.makeText(SignIn.this, "User Doesn't Exist", Toast.LENGTH_SHORT).show();
                         }
+                        else
+                        {
+                            mDialog.dismiss();
+
+                            Toast.makeText(SignIn.this,"User not exist in Database!", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
 
                     @Override
@@ -72,5 +81,6 @@ public class SignIn extends AppCompatActivity {
                 });
             }
         });
+
     }
 }

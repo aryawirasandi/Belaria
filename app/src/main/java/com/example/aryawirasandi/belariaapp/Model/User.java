@@ -1,10 +1,9 @@
 package com.example.aryawirasandi.belariaapp.Model;
 
 public class User {
-    private String Name;
-    private String Password;
-    private String Phone;
-
+    private  String Name;
+    private  String Password;
+    private  String Phone;
 
     public User() {
     }

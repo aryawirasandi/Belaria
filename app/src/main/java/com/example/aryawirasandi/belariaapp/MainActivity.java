@@ -12,33 +12,41 @@ import java.lang.reflect.Type;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnSignin, btnSignUp;
-    TextView txtSlogan;
+    Button btnSignIn,btnSignUp;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnSignin = findViewById(R.id.btnSignIn);
-        btnSignUp = findViewById(R.id.btnSignUp);
+        btnSignIn =(Button)findViewById(R.id.btnSignIn);
+        btnSignUp=(Button)findViewById(R.id.btnSignUp);
 
-        txtSlogan = findViewById(R.id.txtSlogan);
-        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/NABILA.TTF");
-
-        btnSignin.setOnClickListener(new View.OnClickListener() {
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent pindah = new Intent(MainActivity.this, SignIn.class);
-                startActivity(pindah);
+
             }
         });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent pindah = new Intent(MainActivity.this, SignUp.class);
-                startActivity(pindah);
+                Intent signUp = new Intent(MainActivity.this,SignUp.class);
+                startActivity(signUp);
+
             }
         });
+
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signIn = new Intent(MainActivity.this,SignIn.class);
+                startActivity(signIn);
+            }
+        });
+
     }
 }

@@ -7,39 +7,32 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.aryawirasandi.belariaapp.Interface.itemClickListener;
+import com.example.aryawirasandi.belariaapp.Interface.ItemClickListener;
 import com.example.aryawirasandi.belariaapp.R;
 public class foodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
 
     public TextView food_name;
     public ImageView food_image;
-    private itemClickListener ItemClickListener;
 
-    public foodViewHolder(View itemView, itemClickListener itemClickListener) {
-        super(itemView);
-        ItemClickListener = itemClickListener;
+    private ItemClickListener ItemClickListener;
+
+    public void setItemClickListener(ItemClickListener ItemClickListener) {
+        this.ItemClickListener = ItemClickListener;
     }
 
     public foodViewHolder(View itemView) {
         super(itemView);
+
         food_name = (TextView)itemView.findViewById(R.id.food_name);
         food_image = (ImageView)itemView.findViewById(R.id.food_image);
 
         itemView.setOnClickListener(this);
     }
 
-
-    public itemClickListener getItemClickListener() {
-        return ItemClickListener;
-    }
-
-    public void setItemClickListener(itemClickListener itemClickListener) {
-        ItemClickListener = itemClickListener;
-    }
-
     @Override
     public void onClick(View view) {
-        ItemClickListener.onClick(view, getAdapterPosition(), false);
+        ItemClickListener.onClick(view,getAdapterPosition(),false);
+
     }
 }

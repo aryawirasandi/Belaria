@@ -4,8 +4,7 @@ public class Category {
     private String Name;
     private String Image;
 
-    public Category(){
-
+    public Category() {
     }
 
     public Category(String name, String image) {
