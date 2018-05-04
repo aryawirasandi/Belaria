@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.aryawirasandi.belariaapp.Common.Common;
 import com.example.aryawirasandi.belariaapp.Interface.ItemClickListener;
 import com.example.aryawirasandi.belariaapp.Model.Category;
+import com.example.aryawirasandi.belariaapp.Service.ListenOrder;
 import com.example.aryawirasandi.belariaapp.ViewHolder.MenuViewHolder;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -86,6 +87,9 @@ public class Home extends AppCompatActivity
         recycler_menu.setLayoutManager(layoutManager);
 
         loadMenu();
+
+        Intent intent = new Intent(Home.this, ListenOrder.class);
+        startService(intent);
 
     }
 
