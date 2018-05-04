@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BELARIAINDONESIA.iml" filepath="$PROJECT_DIR$/BELARIAINDONESIA.iml" />
-      <module fileurl="file://D:\Perkuliahan\SMSTR 6\RPL (CAPSTONE)\BELARIAINDONESIA\BelariaApp.iml" filepath="D:\Perkuliahan\SMSTR 6\RPL (CAPSTONE)\BELARIAINDONESIA\BelariaApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/belaria.iml" filepath="$PROJECT_DIR$/belaria.iml" />
     </modules>
   </component>
 </project>
